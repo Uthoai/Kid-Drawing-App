@@ -3,8 +3,10 @@ package com.top.best.kid.drawing.app
 import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageButton
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.get
 
@@ -23,9 +25,6 @@ class MainActivity : AppCompatActivity() {
         myImageButtonCurrentPaint!!.setImageDrawable(
             ContextCompat.getDrawable(this,R.drawable.pressed_color_pallet)
         )
-
-
-
 
         val ibBrush: ImageButton = findViewById(R.id.ib_brushChooseBtn)
         ibBrush.setOnClickListener {
@@ -57,5 +56,23 @@ class MainActivity : AppCompatActivity() {
         }
 
         brushDialog.show()
+    }
+
+    fun paintClicked(view: View){
+        if (view !== myImageButtonCurrentPaint){
+            val imageButton = view as ImageButton
+            val colorTag = imageButton.tag.toString()
+            drawingView?.setColor(colorTag)
+
+            imageButton.setImageDrawable(
+                ContextCompat.getDrawable(this,R.drawable.pressed_color_pallet)
+            )
+
+            myImageButtonCurrentPaint!!.setImageDrawable(
+                ContextCompat.getDrawable(this,R.drawable.normal_color_pallet)
+            )
+
+            myImageButtonCurrentPaint = view
+        }
     }
 }
