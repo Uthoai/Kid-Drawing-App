@@ -19,10 +19,13 @@ class MainActivity : AppCompatActivity() {
 
         val linearLayoutPaintColors = findViewById<LinearLayout>(R.id.ll_color_pallet)
 
-        myImageButtonCurrentPaint = linearLayoutPaintColors[2] as ImageButton
+        myImageButtonCurrentPaint = linearLayoutPaintColors[1] as ImageButton
         myImageButtonCurrentPaint!!.setImageDrawable(
             ContextCompat.getDrawable(this,R.drawable.pressed_color_pallet)
         )
+
+
+
 
         val ibBrush: ImageButton = findViewById(R.id.ib_brushChooseBtn)
         ibBrush.setOnClickListener {
