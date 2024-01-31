@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Path
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
 
@@ -33,7 +34,7 @@ class DrawingView(context: Context,attrs: AttributeSet): View(context,attrs) {
         myDrawPaint!!.strokeJoin = Paint.Join.ROUND
         myDrawPaint!!.strokeCap = Paint.Cap.ROUND
         myCanvasPaint = Paint(Paint.DITHER_FLAG)
-        myBrushSize = 16.toFloat()
+        //myBrushSize = 16.toFloat()
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
@@ -92,6 +93,13 @@ class DrawingView(context: Context,attrs: AttributeSet): View(context,attrs) {
         }
         invalidate()
         return true
+    }
+
+    fun setSizeForBrush(newSize: Float){
+        myBrushSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+            newSize,resources.displayMetrics
+        )
+        myDrawPaint!!.strokeWidth = myBrushSize
     }
 
     internal inner class CustomPath(var color: Int,var brushThickness: Float): Path() {
