@@ -20,6 +20,7 @@ class DrawingView(context: Context,attrs: AttributeSet): View(context,attrs) {
     private var color = Color.BLACK
     private var canvas: Canvas? = null
     private var myPaths = ArrayList<CustomPath>()
+    private var myUndoPaths = ArrayList<CustomPath>()
 
 
     init {
@@ -41,6 +42,13 @@ class DrawingView(context: Context,attrs: AttributeSet): View(context,attrs) {
         super.onSizeChanged(w, h, oldw, oldh)
         myCanvasBitmap = Bitmap.createBitmap(w,h,Bitmap.Config.ARGB_8888)
         canvas = Canvas(myCanvasBitmap!!)
+    }
+
+    fun onClickUndo(){
+        if (myPaths.size > 0){
+            myUndoPaths.add(myPaths.removeAt(myPaths.size - 1))
+            invalidate()
+        }
     }
 
     override fun onDraw(canvas: Canvas) {
